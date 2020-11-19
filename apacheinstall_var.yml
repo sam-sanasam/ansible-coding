@@ -1,0 +1,17 @@
+---
+ - hosts: all
+   become: true
+   vars: 
+     apache: apache2
+     file_content: Hello this in the variblelization of file
+     file_dest: /var/www/html/index2.html
+     service_apache: apache2
+   tasks:
+    - name: Apache installation
+      apt: name={{ apache }} state=present update_cache=true
+    - name: creating a file
+      copy: 
+         content: "{{ file_content }}"
+         dest: "{{ file_dest }}"
+    - name: apache service 
+      service: name={{ service_apache }} state=started    	 

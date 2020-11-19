@@ -1,0 +1,15 @@
+---
+ - hosts: db1
+   become: true
+   tasks:
+    - name: Install nginx
+      apt: pkg=nginx state=present  update_cache=true
+    - name: event that requires service restart
+      copy:
+        content: "Hello nginx"
+        dest: /usr/share/nginx/html/index.html
+      notify: handlers_name
+
+   handlers:
+    - name: handlers_name
+      service: name=nginx state=restarted

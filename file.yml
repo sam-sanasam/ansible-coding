@@ -1,0 +1,8 @@
+---
+ - hosts: all
+   become: true 
+   tasks:
+    - name: Hello World
+      copy:
+         content: 'Hello World'
+         dest: /var/hello.txt

@@ -1,0 +1,17 @@
+---
+ - hosts: all
+   become: true
+   tasks:
+   # - name: system update
+   #   command: apt-get -y update- not required since the update_cache is set True
+    - name: Apache installation
+      apt: pkg=apache2 state=present update_cache=true
+    
+    - name: Copy the file 
+      copy: 
+         content: 'Hello World'
+         dest: /var/www/html/index.html
+
+    - name: Apache service
+      service: name=apache2 state=started 
+    

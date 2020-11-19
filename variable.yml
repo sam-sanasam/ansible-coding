@@ -1,0 +1,8 @@
+---
+ - hosts: all 
+   become: true 
+   vars: 
+     var_x: lynx
+   tasks:
+    - name: Install Package 
+      apt: name={{ var_x }} state=latest
